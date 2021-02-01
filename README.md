@@ -5,14 +5,14 @@
 ## David
 
 ## Mate
-####Nem jatekok:
+#### Nem jatekok:
 *Custom Cipher (szovegeket jelszavakat titkosito szoftver)
 *Chat app
 *Valamilyen Web Bot //Java es pythonnal is siman lehetne
 *Quiz szoftver - Vizsga szoftver - Legyen Ön is milliomos
 *Idojaras jelentes szoftver
 
-####Jatekok:
+#### Jatekok:
 *Flappy Bird
 *Hangman (Akasztofa? nemtudom a magyar nevet az a szokitalalos jatek)
 *Sakk
