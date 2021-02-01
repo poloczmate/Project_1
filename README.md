@@ -1,2 +1,9 @@
-# Project_1
-Repository for Project 1 Subject at Szechenyi Istvan University
+# Project_1 Ideas
+
+Reka
+
+David
+
+Mate
+
+Tomi
