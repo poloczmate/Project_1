@@ -11,6 +11,7 @@
 * Valamilyen Web Bot //Java es pythonnal is siman lehetne
 * Quiz szoftver - Vizsga szoftver - Legyen Ön is milliomos
 * Idojaras jelentes szoftver
+* Bevasarlo lista szoftver
 
 #### Jatekok:
 * Flappy Bird
