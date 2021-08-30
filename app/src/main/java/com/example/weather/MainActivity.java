@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -14,9 +16,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void click(View v){
-        TextView tv = (TextView) findViewById(R.id.alma);
-        CurrentWeatherAPI CWAPI = new CurrentWeatherAPI();
-        tv.setText(CWAPI.getNews());
+    public void click(View v) throws InterruptedException {
+        CurrentWeather CW = new CurrentWeather();
+        System.out.println(CW.getNews("London"));
     }
 }

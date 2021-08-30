@@ -1,33 +1,37 @@
 package com.example.weather;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.net.UnknownServiceException;
-import java.util.concurrent.TimeUnit;
 
-public class CurrentWeatherAPI {
-    //class to access current weather data for any location including over 200,000 cities
-    String URL = "api.openweathermap.org/data/2.5/weather?q=";
-    String APIKey = "dac4c16af73f626902b58b1e8f36bb28";
-    String URL2 = "&appid=";
+public class APIParser extends AsyncTask<String, String, String> {
+    private String URL = "api.openweathermap.org/data/2.5/weather?q=";
+    private String APIKey = "dac4c16af73f626902b58b1e8f36bb28";
+    private String URL2 = "&appid=";
+    private String returnString = "";
 
     private String buildURL(String city){
         return "https://" + URL + city + URL2 + APIKey;
     }
 
-    private String requestData(String city) throws Exception {
-        String url = buildURL(city);
+    public String getData(){
+        return returnString;
+    }
+
+    @Override
+    protected String doInBackground(String... city) {
+        String url = buildURL(city[0]);
         URL obj = null;
         try {
             obj = new URL(url);
         } catch (MalformedURLException e) {
             // TODO improve ErrorHandling
-            throw new Exception("URL Problem");
+            System.out.println("URL Exception");
         }
         HttpURLConnection con;
         StringBuilder response = new StringBuilder();
@@ -44,25 +48,27 @@ public class CurrentWeatherAPI {
         } catch (IOException e) {
             // TODO improve ErrorHandling
             System.out.println("Error "+e.getMessage());
-            throw new Exception();
         }
+        returnString = response.toString();
         return response.toString();
     }
 
-    public String getNews(){
-        CurrentWeatherResponse response = null;
-        String jsonResponse = null;
-        try {
-            jsonResponse = requestData("London");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        if(jsonResponse != null && !jsonResponse.isEmpty()){
-            System.out.println("korte");
-            System.out.print(jsonResponse);
-        }
-        //TODO improve Errorhandling
-        return jsonResponse;
+    @Override
+    protected void onPreExecute() {
+        // Runs on UI thread- Any code you wants
+        // to execute before web service call. Put it here.
+        // Eg show progress dialog
     }
 
+    @Override
+    protected void onProgressUpdate(String... values) {
+        super.onProgressUpdate(values);
+    }
+
+    @Override
+    protected void onPostExecute(String resp) {
+
+        // runs in UI thread - You may do what you want with response
+        // Eg Cancel progress dialog - Use result
+    }
 }
