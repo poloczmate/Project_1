@@ -19,15 +19,15 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 public class LocationTracker implements LocationListener{
-    //TODO SINGLETON
+    //TODO SINGLETON maybe
     private final Context mContext;
-    public boolean GPSEnabled = false;
-    public boolean NetworkEnabled = false;
+    private boolean GPSEnabled = false;
+    private boolean NetworkEnabled = false;
     boolean canGetLocation = false;
 
-    Location location;
-    double latitude;
-    double longitude;
+    private Location location;
+    private double latitude;
+    private double longitude;
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters

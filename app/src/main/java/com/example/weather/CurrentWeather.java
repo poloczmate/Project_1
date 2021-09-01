@@ -24,6 +24,10 @@ public class CurrentWeather {
         }
     }
 
+    public void getResponse() {
+        response = api.getData();
+    }
+
     private double KtoC(double kelvin){
         kelvin -= 272.15;
         return (double) Math.round(kelvin * 100) / 100; //round it to 2 decimal

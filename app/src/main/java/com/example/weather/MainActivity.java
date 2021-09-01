@@ -31,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         CurrentWeather CW = new CurrentWeather(lat,lon);
         //wait for the API response
         try {
-            TimeUnit.SECONDS.sleep(1);
+            while (CW.response.equals("")) {
+                CW.getResponse();
+                TimeUnit.MILLISECONDS.sleep(500);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
