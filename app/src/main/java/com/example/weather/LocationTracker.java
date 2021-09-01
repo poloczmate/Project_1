@@ -17,8 +17,6 @@ import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 public class LocationTracker implements LocationListener{
     //TODO SINGLETON
@@ -38,9 +36,6 @@ public class LocationTracker implements LocationListener{
     private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
 
     protected LocationManager locationManager;
-
-    //get access to location permission
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     public LocationTracker(Context context) {
         this.mContext = context;

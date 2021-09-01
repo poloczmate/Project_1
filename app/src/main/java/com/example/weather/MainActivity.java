@@ -1,23 +1,12 @@
 package com.example.weather;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.concurrent.TimeUnit;
-
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -30,8 +19,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean permissionsGranted = requestLocationPermission();
+        if (permissionsGranted){
+            LocationTracker locationTracker = new LocationTracker(this);
+            if (locationTracker.canGetLocation){
+                locationTracker.getLocation();
+                this.lat = locationTracker.getLatitude();
+                this.lon = locationTracker.getLongitude();
+            }
+        }
+        CurrentWeather CW = new CurrentWeather(lat,lon);
+        //wait for the API response
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        requestLocationPermission();
+        //get GUI elements
+        TextView we = (TextView) findViewById(R.id.weather);
+        TextView te = (TextView) findViewById(R.id.temp);
+        TextView wi = (TextView) findViewById(R.id.wind);
+        TextView cn = (TextView) findViewById(R.id.cityName);
+
+        //update GUI
+        we.setText(CW.getWeather());
+        te.setText("Celsius: " + CW.getCelsius() + ", feels like: " + CW.getFeelsLike() + " celsius");
+        wi.setText(CW.getWind());
+        cn.setText(CW.getCityName());
     }
 
     @Override
@@ -43,43 +58,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @AfterPermissionGranted(REQUEST_LOCATION_PERMISSION)
-    public void requestLocationPermission() {
+    public boolean requestLocationPermission() {
         String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
         if(EasyPermissions.hasPermissions(this, perms)) {
-            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+            return true;
         }
         else {
             EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_LOCATION_PERMISSION, perms);
+            return false;
         }
-    }
-
-
-    public void click(View v) throws InterruptedException {
-        LocationTracker locationTracker = new LocationTracker(this);
-        if (locationTracker.canGetLocation){
-            locationTracker.getLocation();
-            lat = locationTracker.getLatitude();
-            lon = locationTracker.getLongitude();
-
-        }else{
-            System.out.println("Unable to find");
-        }
-
-        System.out.println(lat);
-        System.out.println(lon);
-
-        TextView we = (TextView) findViewById(R.id.weather);
-        TextView te = (TextView) findViewById(R.id.temp);
-        TextView wi = (TextView) findViewById(R.id.wind);
-        TextView cn = (TextView) findViewById(R.id.cityName);
-
-        CurrentWeather CW = new CurrentWeather();
-        TimeUnit.SECONDS.sleep(1);
-        we.setText(CW.getWeather(lat, lon));
-        te.setText("Celsius: " + CW.getCelsius(lat, lon) + ", feels like: " + CW.getFeelsLike(lat, lon) + " celsius");
-        wi.setText(CW.getWind(lat, lon));
-        cn.setText(CW.getCityName(lat, lon));
-
-
     }
 }

@@ -5,29 +5,34 @@ import org.json.*;
 
 public class CurrentWeather {
     //class to access current weather data for any location including over 200,000 cities
+    private APIParser api;
+    public String response = "";
+    private double lat;
+    private double lon;
+
+    public CurrentWeather(double lat, double lon){
+        this.lat = lat;
+        this.lon = lon;
+        //get data from API
+        try {
+            this.api = new APIParser();
+            api.execute(lat,lon);
+            TimeUnit.SECONDS.sleep(2);
+            this.response = api.getData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private double KtoC(double kelvin){
         kelvin -= 272.15;
         return (double) Math.round(kelvin * 100) / 100; //round it to 2 decimal
     }
 
-    private String getUpdate(double lat, double lon){
-        String response = null;
-        try {
-            APIParser api = new APIParser();
-            api.execute(lat,lon);
-            TimeUnit.SECONDS.sleep(1);
-            response = api.getData();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        //TODO improve Errorhandling
-        return response;
-    }
-
-    public String getWeather(double lat, double lon){
+    public String getWeather(){
         JSONObject obj = null;
         try {
-            obj = new JSONObject(getUpdate(lat, lon));
+            obj = new JSONObject(response);
             JSONArray arr = obj.getJSONArray("weather");
             return arr.getJSONObject(0).getString("main") + ", " + arr.getJSONObject(0).getString("description");
         } catch (JSONException e) {
@@ -36,11 +41,11 @@ public class CurrentWeather {
         return "";
     }
 
-    public String getWind(double lat, double lon){
+    public String getWind(){
         JSONObject obj = null;
         String toReturn = "Speed: ";
         try {
-            obj = new JSONObject(getUpdate(lat,lon));
+            obj = new JSONObject(response);
             toReturn += obj.getJSONObject("wind").getString("speed") + " direction: ";
             double degrees = obj.getJSONObject("wind").getDouble("deg");
             if (degrees >= 348.75 || degrees <= 11.25){
@@ -82,10 +87,10 @@ public class CurrentWeather {
         return toReturn;
     }
 
-    public String getCelsius(double lat, double lon){
+    public String getCelsius(){
         JSONObject obj = null;
         try {
-            obj = new JSONObject(getUpdate(lat,lon));
+            obj = new JSONObject(response);
             double temp = KtoC(obj.getJSONObject("main").getDouble("temp"));
             return String.valueOf(temp);
         } catch (JSONException e) {
@@ -94,10 +99,10 @@ public class CurrentWeather {
         return ""; //-250 = error
     }
 
-    public String getFeelsLike(double lat, double lon){
+    public String getFeelsLike(){
         JSONObject obj = null;
         try {
-            obj = new JSONObject(getUpdate(lat,lon));
+            obj = new JSONObject(response);
             double temp = KtoC(obj.getJSONObject("main").getDouble("feels_like"));
             return String.valueOf(temp);
         } catch (JSONException e) {
@@ -106,10 +111,10 @@ public class CurrentWeather {
         return ""; //-250 = error
     }
 
-    public String getCityName(double lat, double lon){
+    public String getCityName(){
         JSONObject obj = null;
         try{
-            obj = new JSONObject(getUpdate(lat, lon));
+            obj = new JSONObject(response);
             return obj.getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
