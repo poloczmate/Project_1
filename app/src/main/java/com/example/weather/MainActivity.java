@@ -12,8 +12,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity {
     private final int REQUEST_LOCATION_PERMISSION = 1;
-    double lat;
-    double lon;
+    double lat = 0;
+    double lon = 0;
+    LocationTracker locationTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +22,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         boolean permissionsGranted = requestLocationPermission();
         if (permissionsGranted){
-            LocationTracker locationTracker = new LocationTracker(this);
+            locationTracker = new LocationTracker(this);
             if (locationTracker.canGetLocation){
                 locationTracker.getLocation();
                 this.lat = locationTracker.getLatitude();
                 this.lon = locationTracker.getLongitude();
             }
         }
+        try {
+            while (this.lat == 0 && this.lon == 0) {
+                TimeUnit.MILLISECONDS.sleep(500);
+                this.lat = locationTracker.getLatitude();
+                this.lon = locationTracker.getLongitude();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         CurrentWeather CW = new CurrentWeather(lat,lon);
         //wait for the API response
         try {
