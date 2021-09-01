@@ -23,6 +23,8 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity {
     private final int REQUEST_LOCATION_PERMISSION = 1;
+    double lat;
+    double lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +55,31 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void click(View v) throws InterruptedException {
-        TextView we = (TextView) findViewById(R.id.weather);
-        TextView te = (TextView) findViewById(R.id.temp);
-        TextView wi = (TextView) findViewById(R.id.wind);
-        TextView tv = (TextView) findViewById(R.id.cityName);
-        String city = tv.getText().toString();
-
-        CurrentWeather CW = new CurrentWeather();
-        we.setText(CW.getWeather(city));
-        te.setText("Celsius: " + CW.getCelsius(city) + ", feels like: " + CW.getFeelsLike(city) + " celsius");
-        wi.setText(CW.getWind(city));
-
         LocationTracker locationTracker = new LocationTracker(this);
         if (locationTracker.canGetLocation){
             locationTracker.getLocation();
-            System.out.println(locationTracker.getLatitude());
-            System.out.println(locationTracker.getLongitude());
+            lat = locationTracker.getLatitude();
+            lon = locationTracker.getLongitude();
 
         }else{
             System.out.println("Unable to find");
         }
+
+        System.out.println(lat);
+        System.out.println(lon);
+
+        TextView we = (TextView) findViewById(R.id.weather);
+        TextView te = (TextView) findViewById(R.id.temp);
+        TextView wi = (TextView) findViewById(R.id.wind);
+        TextView cn = (TextView) findViewById(R.id.cityName);
+
+        CurrentWeather CW = new CurrentWeather();
+        TimeUnit.SECONDS.sleep(1);
+        we.setText(CW.getWeather(lat, lon));
+        te.setText("Celsius: " + CW.getCelsius(lat, lon) + ", feels like: " + CW.getFeelsLike(lat, lon) + " celsius");
+        wi.setText(CW.getWind(lat, lon));
+        cn.setText(CW.getCityName(lat, lon));
+
+
     }
 }

@@ -9,14 +9,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class APIParser extends AsyncTask<String, String, String> {
-    private String URL = "api.openweathermap.org/data/2.5/weather?q=";
+public class APIParser extends AsyncTask<Number, Number, String> {
+    private String URL = "api.openweathermap.org/data/2.5/weather?lat=";
     private String APIKey = "dac4c16af73f626902b58b1e8f36bb28";
-    private String URL2 = "&appid=";
+    private String URL2 = "&lon=";
+    private String URL3 = "&appid=";
     private String returnString = "";
 
-    private String buildURL(String city){
-        return "https://" + URL + city + URL2 + APIKey;
+    private String buildURL(double lat, double lon){
+        return "https://" + URL + Double.toString(lat) + URL2 + Double.toString(lon) + URL3 + APIKey;
     }
 
     public String getData(){
@@ -24,8 +25,8 @@ public class APIParser extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected String doInBackground(String... city) {
-        String url = buildURL(city[0]);
+    protected String doInBackground(Number... numbers) {
+        String url = buildURL(numbers[0].doubleValue(), numbers[1].doubleValue());
         URL obj = null;
         try {
             obj = new URL(url);
@@ -61,14 +62,12 @@ public class APIParser extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onProgressUpdate(String... values) {
-        super.onProgressUpdate(values);
+    protected void onProgressUpdate(Number... numbers) {
+        super.onProgressUpdate(numbers);
     }
 
     @Override
     protected void onPostExecute(String resp) {
 
-        // runs in UI thread - You may do what you want with response
-        // Eg Cancel progress dialog - Use result
     }
 }
