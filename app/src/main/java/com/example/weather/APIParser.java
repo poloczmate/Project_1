@@ -16,6 +16,10 @@ public class APIParser extends AsyncTask<Number, Number, String> {
     private String URL3 = "&appid=";
     private String returnString = "";
 
+    public APIParser(String type){ //weather for CurrentWeather onecall for OneCallWeather
+        URL = "api.openweathermap.org/data/2.5/" + type + "?lat=";
+    }
+
     private String buildURL(double lat, double lon){
         return "https://" + URL + Double.toString(lat) + URL2 + Double.toString(lon) + URL3 + APIKey;
     }

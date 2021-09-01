@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import org.json.*;
 
 public class CurrentWeather {
+    //TODO interface for Weathers!
     //class to access current weather data for any location including over 200,000 cities
     private APIParser api;
     public String response = "";
@@ -15,7 +16,7 @@ public class CurrentWeather {
         this.lon = lon;
         //get data from API
         try {
-            this.api = new APIParser();
+            this.api = new APIParser("weather");
             api.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
             this.response = api.getData();
