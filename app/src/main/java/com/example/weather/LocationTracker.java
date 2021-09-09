@@ -55,7 +55,7 @@ public class LocationTracker implements LocationListener{
             Log.v("NetworkEnabled", "=" + NetworkEnabled); //small log to the console
 
             if (!GPSEnabled && !NetworkEnabled) {
-                //error these are not enabled
+                Log.v("NetworkEnabled", "error not enabled"); //small log to the console
             } else {
                 this.canGetLocation = true; //we can get the location one way or another
 
