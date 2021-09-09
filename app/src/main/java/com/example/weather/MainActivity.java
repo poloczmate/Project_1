@@ -2,6 +2,7 @@ package com.example.weather;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -62,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         te.setText("Celsius: " + CW.getCelsius() + ", feels like: " + CW.getFeelsLike() + " celsius");
         wi.setText(CW.getWind());
         cn.setText(CW.getCityName());
+    }
+
+    public void switchView(View view){
+        Intent intent = new Intent(this, CityWeatherActivity.class);
+        startActivity(intent);
     }
 
     @Override

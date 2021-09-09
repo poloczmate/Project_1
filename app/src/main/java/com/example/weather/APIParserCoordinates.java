@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class APIParserCoordinates extends AsyncTask<Number, Number, String> {
-    private String URL = "api.openweathermap.org/data/2.5/weather?lat=";
+    private String URL;
     private String APIKey = "dac4c16af73f626902b58b1e8f36bb28";
     private String URL2 = "&lon=";
     private String URL3 = "&appid=";
