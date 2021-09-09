@@ -6,27 +6,46 @@ import org.json.*;
 public class CurrentWeather {
     //TODO interface for Weathers!
     //class to access current weather data for any location including over 200,000 cities
-    private APIParserCoordinates api;
+    private APIParserCoordinates apico = null;
+    private ApiParserCity apici = null;
     public String response = "";
     private double lat;
     private double lon;
+    private String city;
 
     public CurrentWeather(double lat, double lon){
         this.lat = lat;
         this.lon = lon;
         //get data from API
         try {
-            this.api = new APIParserCoordinates("weather");
-            api.execute(lat,lon);
+            this.apico = new APIParserCoordinates("weather");
+            apico.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
-            this.response = api.getData();
+            this.response = apico.getData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public CurrentWeather(String city){
+        this.city = city;
+        //get data from API
+        try {
+            this.apici = new ApiParserCity("weather");
+            apici.execute(city);
+            TimeUnit.SECONDS.sleep(2);
+            this.response = apici.getData();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     public void getResponse() {
-        response = api.getData();
+        if (apico.equals(null)){
+            response = apici.getData();
+        }else{
+            response = apico.getData();
+        }
     }
 
     private double KtoC(double kelvin){

@@ -4,7 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 public class OneCallWeather {
     //TODO interface for Weathers!
-    private APIParserCoordinates api;
+    private APIParserCoordinates apico = null;
+    private ApiParserCity apici = null;
     public String response = "";
     private double lat;
     private double lon;
@@ -15,10 +16,10 @@ public class OneCallWeather {
         this.lon = lon;
         //get data from API
         try {
-            this.api = new APIParserCoordinates("onecall");
-            api.execute(lat,lon);
+            this.apico = new APIParserCoordinates("onecall");
+            apico.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
-            this.response = api.getData();
+            this.response = apico.getData();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -27,17 +28,21 @@ public class OneCallWeather {
     public OneCallWeather(String city){
         this.city = city;
         try{
-            this.api = new APIParserCoordinates("onecall");
-            api.execute();
+            this.apici = new ApiParserCity("onecall");
+            apici.execute(city);
             TimeUnit.SECONDS.sleep(2);
-            this.response = api.getData();
+            this.response = apici.getData();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     public void getResponse() {
-        response = api.getData();
+        if (apico.equals(null)){
+            response = apici.getData();
+        }else{
+            response = apico.getData();
+        }
     }
 
     private double KtoC(double kelvin){
