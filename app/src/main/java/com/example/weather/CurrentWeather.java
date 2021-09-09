@@ -6,7 +6,7 @@ import org.json.*;
 public class CurrentWeather {
     //TODO interface for Weathers!
     //class to access current weather data for any location including over 200,000 cities
-    private APIParser api;
+    private APIParserCoordinates api;
     public String response = "";
     private double lat;
     private double lon;
@@ -16,7 +16,7 @@ public class CurrentWeather {
         this.lon = lon;
         //get data from API
         try {
-            this.api = new APIParser("weather");
+            this.api = new APIParserCoordinates("weather");
             api.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
             this.response = api.getData();
