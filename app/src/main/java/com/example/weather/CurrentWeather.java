@@ -5,13 +5,13 @@ import org.json.*;
 
 public class CurrentWeather {
     //class to access current weather data for any location including over 200,000 cities
-    private APIParserCoordinates api;
+    private APIParser api;
     public String response = "";
 
     public CurrentWeather(double lat, double lon){
         //get data from API
         try {
-            this.api = new APIParserCoordinates("weather");
+            this.api = new APIParser("weather");
             api.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
             while (response.equals("")) this.response = api.getData();

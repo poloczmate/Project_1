@@ -9,14 +9,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class APIParserCoordinates extends AsyncTask<Number, Number, String> {
+public class APIParser extends AsyncTask<Number, Number, String> {
     private String URL;
     private String APIKey = "dac4c16af73f626902b58b1e8f36bb28";
     private String URL2 = "&lon=";
     private String URL3 = "&appid=";
     private String returnString = "";
 
-    public APIParserCoordinates(String type){ //weather for CurrentWeather onecall for OneCallWeather
+    public APIParser(String type){ //weather for CurrentWeather onecall for OneCallWeather
         URL = "api.openweathermap.org/data/2.5/" + type + "?lat=";
     }
 

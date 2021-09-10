@@ -1,7 +1,5 @@
 package com.example.weather;
 
-import android.util.JsonReader;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +7,7 @@ import org.json.JSONObject;
 import java.util.concurrent.TimeUnit;
 
 public class OneCallWeather {
-    private APIParserCoordinates api;
+    private APIParser api;
     public String response = "";
     private String cityName;
 
@@ -19,7 +17,7 @@ public class OneCallWeather {
 
         //get data from API
         try {
-            this.api = new APIParserCoordinates("onecall");
+            this.api = new APIParser("onecall");
             api.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
             this.response = api.getData();
