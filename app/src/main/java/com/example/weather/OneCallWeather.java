@@ -9,16 +9,11 @@ import org.json.JSONObject;
 import java.util.concurrent.TimeUnit;
 
 public class OneCallWeather {
-    //TODO interface for Weathers!
     private APIParserCoordinates api;
     public String response = "";
-    private double lat;
-    private double lon;
     private String cityName;
 
     public OneCallWeather(double lat, double lon){
-        this.lat = lat;
-        this.lon = lon;
         //CurrentWeatherAPI because we need the name of the city
         CurrentWeather CW = new CurrentWeather(lat,lon);
 
@@ -38,11 +33,13 @@ public class OneCallWeather {
         response = api.getData();
     }
 
+    //convert kelvin to celsius
     private double KtoC(double kelvin){
         kelvin -= 272.15;
         return (double) Math.round(kelvin * 100) / 100; //round it to 2 decimal
     }
 
+    //get weather description
     public String getWeather(){
         JSONObject obj = null;
         try{
@@ -55,6 +52,7 @@ public class OneCallWeather {
         return "";
     }
 
+    //get wind speed and direction
     public String getWind(){
         JSONObject obj = null;
         String toReturn = "Speed: ";
@@ -102,6 +100,7 @@ public class OneCallWeather {
         return toReturn;
     }
 
+    //get the temperature
     public String getCelsius(){
         JSONObject obj = null;
         try {
@@ -114,6 +113,7 @@ public class OneCallWeather {
         return ""; //-250 = error
     }
 
+    //get how the temperature feels
     public String getFeelsLike(){
         JSONObject obj = null;
         try {
@@ -125,7 +125,7 @@ public class OneCallWeather {
         }
         return ""; //-250 = error
     }
-
+    //return the name of the city
     public String getCityName(){
         return cityName;
     }
