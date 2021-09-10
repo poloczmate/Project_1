@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
                 this.lon = locationTracker.getLongitude();
             }
         }
+
+        //wait for locationmanager to answer
         try {
             while (this.lat == 0 && this.lon == 0) {
                 TimeUnit.MILLISECONDS.sleep(500);
@@ -41,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        CurrentWeather CW = new CurrentWeather(lat,lon);
+        OneCallWeather OCW = new OneCallWeather(lat,lon);
         //wait for the API response
         try {
-            while (CW.response.equals("")) {
-                CW.getResponse();
+            while (OCW.response.equals("")) {
+                OCW.getResponse();
                 TimeUnit.MILLISECONDS.sleep(500);
             }
         } catch (InterruptedException e) {
@@ -59,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
         TextView cn = (TextView) findViewById(R.id.cityName);
 
         //update GUI
-        we.setText(CW.getWeather());
-        te.setText("Celsius: " + CW.getCelsius() + ", feels like: " + CW.getFeelsLike() + " celsius");
-        wi.setText(CW.getWind());
-        cn.setText(CW.getCityName());
+        we.setText(OCW.getWeather());
+        te.setText("Celsius: " + OCW.getCelsius() + ", feels like: " + OCW.getFeelsLike() + " celsius");
+        wi.setText(OCW.getWind());
+        cn.setText(OCW.getCityName());
     }
 
     public void switchView(View view){

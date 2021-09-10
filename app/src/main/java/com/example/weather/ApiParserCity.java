@@ -30,6 +30,7 @@ public class ApiParserCity extends AsyncTask<String, Number, String> {
     @Override
     protected String doInBackground(String... city) {
         String url = buildURL(city[0]);
+        System.out.println(url);
         java.net.URL obj = null;
         try {
             obj = new URL(url);
