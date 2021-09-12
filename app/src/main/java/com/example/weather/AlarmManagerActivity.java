@@ -11,17 +11,19 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.weather.databinding.ActivityAlarmManagerBinding;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 public class AlarmManagerActivity extends AppCompatActivity {
 
-    private ActivityAlarmManagerBinding binding;
     private MaterialTimePicker picker;
     private Calendar calendar;
     private AlarmManager alarmManager;
@@ -30,35 +32,13 @@ public class AlarmManagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAlarmManagerBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_alarm_manager);
 
         //create channel
         createNotificationChannel();
-
-        binding.selectTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTimePicker();
-            }
-        });
-
-        binding.setAlarmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setAlarm();
-            }
-        });
-
-        binding.cancelAlarmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelAlarm();
-            }
-        });
     }
 
-    private void cancelAlarm() {
+    public void cancelAlarm(View view) {
         Intent intent = new Intent(this, AlarmReceiver.class);
 
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0); //it should perfectly match with the pendingintent used to set the alarm
@@ -71,7 +51,7 @@ public class AlarmManagerActivity extends AppCompatActivity {
         Toast.makeText(this,"Alarm cancelled successfully", Toast.LENGTH_SHORT).show();
     }
 
-    private void setAlarm() {
+    public void setAlarm(View view) {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(this, AlarmReceiver.class);
@@ -84,7 +64,7 @@ public class AlarmManagerActivity extends AppCompatActivity {
 
     }
 
-    private void showTimePicker() {
+    public void showTimePicker(View view) {
         //show the time picker
         picker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
@@ -92,18 +72,18 @@ public class AlarmManagerActivity extends AppCompatActivity {
                 .setMinute(0)
                 .setTitleText("Select Alarm Time")
                 .build();
-
+        TextView selectedTime = (TextView) findViewById(R.id.selectedTime);
         picker.show(getSupportFragmentManager(),"setAlarmPicker");
 
         picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (picker.getHour() > 12){
-                    binding.selectedTime.setText(
-                            String.format("%02d",(picker.getHour()-12) + " : " + String.format("%02d", picker.getMinute()) + " PM")
+                    selectedTime.setText(
+                            String.format("%02d",(picker.getHour()-12)) + " : " + String.format("%02d", picker.getMinute()) + " PM"
                     );
                 }else{
-                    binding.selectedTime.setText(picker.getHour() + " : " + picker.getMinute() + " AM");
+                    selectedTime.setText(picker.getHour() + " : " + picker.getMinute() + " AM");
                 }
 
                 calendar = Calendar.getInstance();
