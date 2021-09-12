@@ -67,8 +67,13 @@ public class MainActivity extends AppCompatActivity {
         cn.setText(OCW.getCityName());
     }
 
-    public void switchView(View view){
+    public void switchViewCities(View view){
         Intent intent = new Intent(this, CityWeatherActivity.class);
+        startActivity(intent);
+    }
+
+    public void switchViewAlarm(View view){
+        Intent intent = new Intent(this, AlarmManagerActivity.class);
         startActivity(intent);
     }
 
