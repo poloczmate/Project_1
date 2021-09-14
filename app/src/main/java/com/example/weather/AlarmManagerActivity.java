@@ -1,5 +1,6 @@
 package com.example.weather;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
@@ -51,6 +52,7 @@ public class AlarmManagerActivity extends AppCompatActivity {
         Toast.makeText(this,"Alarm cancelled successfully", Toast.LENGTH_SHORT).show();
     }
 
+    
     public void setAlarm(View view) {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 

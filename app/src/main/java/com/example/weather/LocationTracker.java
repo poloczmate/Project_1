@@ -26,8 +26,8 @@ public class LocationTracker implements LocationListener{
     boolean canGetLocation = false;
 
     private Location location;
-    private double latitude;
-    private double longitude;
+    private double latitude = 0;
+    private double longitude = 0;
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters

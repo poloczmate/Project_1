@@ -16,33 +16,49 @@ public class MainActivity extends AppCompatActivity {
     double lat = 0;
     double lon = 0;
     LocationTracker locationTracker;
+    boolean permissionsGranted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        boolean permissionsGranted = requestLocationPermission();
+        permissionsGranted = requestLocationPermission();
+
         if (permissionsGranted){
-            locationTracker = new LocationTracker(this);
+            updateLocation();
+            updateGUI();
+        }
+    }
+
+    public boolean updateLocation(){
+        if (permissionsGranted){
+            if (locationTracker == null)
+                locationTracker = new LocationTracker(this);
             if (locationTracker.canGetLocation){
                 locationTracker.getLocation();
                 this.lat = locationTracker.getLatitude();
                 this.lon = locationTracker.getLongitude();
-            }
-        }
 
-        //wait for locationmanager to answer
-        try {
-            while (this.lat == 0 && this.lon == 0) {
-                TimeUnit.MILLISECONDS.sleep(500);
-                this.lat = locationTracker.getLatitude();
-                this.lon = locationTracker.getLongitude();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+                //wait for locationmanager to answer
+                try {
+                    while (this.lat == 0 && this.lon == 0) {
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        this.lat = locationTracker.getLatitude();
+                        this.lon = locationTracker.getLongitude();
+                    }
 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void updateGUI(){
         OneCallWeather OCW = new OneCallWeather(lat,lon);
         //wait for the API response
         try {
@@ -53,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         //get GUI elements
         TextView we = (TextView) findViewById(R.id.weather);
         TextView te = (TextView) findViewById(R.id.temp);
@@ -89,7 +104,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean requestLocationPermission() {
         String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
         if(EasyPermissions.hasPermissions(this, perms)) {
-            //Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+            permissionsGranted = true;
+            updateLocation();
+            updateGUI();
             return true;
         }
         else {
