@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 //wait for locationmanager to answer
                 try {
                     while (this.lat == 0 && this.lon == 0) {
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(250);
                         this.lat = locationTracker.getLatitude();
                         this.lon = locationTracker.getLongitude();
                     }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             while (OCW.response.equals("")) {
                 OCW.getResponse();
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(250);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

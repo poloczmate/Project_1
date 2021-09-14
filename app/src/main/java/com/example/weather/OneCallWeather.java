@@ -4,14 +4,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class OneCallWeather {
-    private APIParser api;
+    private APIParserCoord api;
     public String response = "";
     private String cityName;
     WeatherHour hourlyData[] = new WeatherHour[24];
+
+    public OneCallWeather(String city){
+        CurrentWeather CW = new CurrentWeather(city);
+        try {
+            double lat = CW.getLat();
+            double lon = CW.getLon();
+            TimeUnit.SECONDS.sleep(2);
+            this.api = new APIParserCoord("onecall");
+            api.execute(lat,lon);
+            TimeUnit.SECONDS.sleep(2);
+            this.response = api.getData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        this.cityName = CW.getCityName();
+        getHourlyWeather();
+
+    }
 
     public OneCallWeather(double lat, double lon){
         //CurrentWeatherAPI because we need the name of the city
@@ -19,7 +36,7 @@ public class OneCallWeather {
 
         //get data from API
         try {
-            this.api = new APIParser("onecall");
+            this.api = new APIParserCoord("onecall");
             api.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
             this.response = api.getData();

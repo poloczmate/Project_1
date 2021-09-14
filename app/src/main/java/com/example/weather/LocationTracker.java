@@ -18,6 +18,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.concurrent.TimeUnit;
+
 public class LocationTracker implements LocationListener{
     //TODO SINGLETON maybe
     private final Context mContext;
