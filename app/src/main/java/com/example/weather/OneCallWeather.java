@@ -1,5 +1,6 @@
 package com.example.weather;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 import org.json.JSONArray;
@@ -73,14 +74,6 @@ public class OneCallWeather {
     }
 
     public int getWeatherID(){
-        /* returns the id of the weather, helps to decide which image, clotches has the app to show
-        1 --> Thunderstorm
-        2 --> Drizzle
-        3 --> Rain
-        4 --> Snow
-        5 --> Clear
-        6 --> Clouds
-        7 --> Extreme */
         JSONObject obj = null;
         try{
             obj = new JSONObject(response);
@@ -197,5 +190,33 @@ public class OneCallWeather {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getColor() {
+        JSONObject obj = null;
+        try{
+            obj = new JSONObject(response);
+            JSONArray arr = obj.getJSONObject("current").getJSONArray("weather");
+            String main = arr.getJSONObject(0).getString("main");
+
+            if (main.equals("Thunderstorm")){
+                return Color.GRAY;
+            } else if (main.equals("Drizzle")){
+                return Color.LTGRAY;
+            } else if (main.equals("Rain")){
+                return Color.GRAY;
+            } else if (main.equals("Snow")){
+                return Color.WHITE;
+            } else if (main.equals("Clear")){
+                return Color.parseColor("#81B4EA");
+            } else if (main.equals("Clouds")){
+                return Color.LTGRAY;
+            } else{
+                return Color.YELLOW;
+            }
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.weather;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.view.View;
@@ -38,11 +39,13 @@ public class CityWeatherActivity extends AppCompatActivity {
         TextView te = (TextView) findViewById(R.id.temp2);
         TextView wi = (TextView) findViewById(R.id.wind2);
         ImageView iv = (ImageView) findViewById(R.id.imageCity);
+        ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.layout2);
 
         //update GUI
         we.setText(OCW.getWeather());
         te.setText("Celsius: " + OCW.getCelsius() + ", feels like: " + OCW.getFeelsLike() + " celsius");
         wi.setText(OCW.getWind());
         iv.setImageResource(OCW.getWeatherID());
+        cl.setBackgroundColor(OCW.getColor());
     }
 }
