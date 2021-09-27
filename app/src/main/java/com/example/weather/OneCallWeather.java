@@ -1,5 +1,7 @@
 package com.example.weather;
 
+import android.graphics.drawable.Drawable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,6 +70,42 @@ public class OneCallWeather {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public int getWeatherID(){
+        /* returns the id of the weather, helps to decide which image, clotches has the app to show
+        1 --> Thunderstorm
+        2 --> Drizzle
+        3 --> Rain
+        4 --> Snow
+        5 --> Clear
+        6 --> Clouds
+        7 --> Extreme */
+        JSONObject obj = null;
+        try{
+            obj = new JSONObject(response);
+            JSONArray arr = obj.getJSONObject("current").getJSONArray("weather");
+            String main = arr.getJSONObject(0).getString("main");
+
+            if (main.equals("Thunderstorm")){
+                return R.drawable.cloud;
+            } else if (main.equals("Drizzle")){
+                return R.drawable.cloud;
+            } else if (main.equals("Rain")){
+                return R.drawable.cloud;
+            } else if (main.equals("Snow")){
+                return R.drawable.cloud;
+            } else if (main.equals("Clear")){
+                return R.drawable.sun;
+            } else if (main.equals("Clouds")){
+                return R.drawable.cloudy;
+            } else{
+                return R.drawable.cloud;
+            }
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     //get wind speed and direction

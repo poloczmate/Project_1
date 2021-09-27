@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.concurrent.TimeUnit;
@@ -74,12 +75,14 @@ public class MainActivity extends AppCompatActivity {
         TextView te = (TextView) findViewById(R.id.temp);
         TextView wi = (TextView) findViewById(R.id.wind);
         TextView cn = (TextView) findViewById(R.id.cityName);
+        ImageView iv = (ImageView) findViewById(R.id.image);
 
         //update GUI
         we.setText(OCW.getWeather());
         te.setText("Celsius: " + OCW.getCelsius() + ", feels like: " + OCW.getFeelsLike() + " celsius");
         wi.setText(OCW.getWind());
         cn.setText(OCW.getCityName());
+        iv.setImageResource(OCW.getWeatherID());
     }
 
     public void switchViewCities(View view){
