@@ -88,19 +88,19 @@ public class OneCallWeather {
             String main = arr.getJSONObject(0).getString("main");
 
             if (main.equals("Thunderstorm")){
-                return R.drawable.cloud;
+                return R.drawable.thunderstorm;
             } else if (main.equals("Drizzle")){
-                return R.drawable.cloud;
+                return R.drawable.drizzle;
             } else if (main.equals("Rain")){
-                return R.drawable.cloud;
+                return R.drawable.rain;
             } else if (main.equals("Snow")){
-                return R.drawable.cloud;
+                return R.drawable.snow;
             } else if (main.equals("Clear")){
-                return R.drawable.sun;
+                return R.drawable.clear;
             } else if (main.equals("Clouds")){
-                return R.drawable.cloudy;
-            } else{
                 return R.drawable.cloud;
+            } else{
+                return R.drawable.extreme;
             }
         } catch (JSONException e){
             e.printStackTrace();
