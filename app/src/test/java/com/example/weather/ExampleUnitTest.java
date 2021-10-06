@@ -18,7 +18,6 @@ public class ExampleUnitTest {
     @Test
     public void Kelvin_Test(){
         OneCallWeather OCW = new OneCallWeather();
-        System.out.println("a");
         assertEquals(10.00, OCW.KtoC(283.15), 0);
     }
 }
