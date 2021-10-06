@@ -15,6 +15,10 @@ public class OneCallWeather {
     private String cityName;
     WeatherHour hourlyData[] = new WeatherHour[24];
 
+    public OneCallWeather(){
+
+    }
+
     public OneCallWeather(String city){
         CurrentWeather CW = new CurrentWeather(city);
         try {
@@ -55,8 +59,8 @@ public class OneCallWeather {
     }
 
     //convert kelvin to celsius
-    private double KtoC(double kelvin){
-        kelvin -= 272.15;
+    public double KtoC(double kelvin){
+        kelvin -= 273.15;
         return (double) Math.round(kelvin * 100) / 100; //round it to 2 decimal
     }
 

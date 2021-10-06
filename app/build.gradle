@@ -6,6 +6,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     defaultConfig {
         applicationId "com.example.weather"
         minSdkVersion 16
@@ -43,4 +47,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'pub.devrel:easypermissions:2.0.1'
+    testImplementation 'org.json:json:20140107'
 }

@@ -14,4 +14,11 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void Kelvin_Test(){
+        OneCallWeather OCW = new OneCallWeather();
+        System.out.println("a");
+        assertEquals(10.00, OCW.KtoC(283.15), 0);
+    }
 }
