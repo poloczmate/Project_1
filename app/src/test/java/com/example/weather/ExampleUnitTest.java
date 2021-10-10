@@ -43,13 +43,11 @@ public class ExampleUnitTest {
         // there is character in a string
         while (st != null) {
 
-            response+=st;
-            st=br.readLine();
+            response += st;
+
+            st = br.readLine();
         }
-
-        System.out.println(response);
     }
-
 
 
 
@@ -68,27 +66,28 @@ public class ExampleUnitTest {
     @Test
     public void Kelvin_Test2(){
         OneCallWeather OCW =  new OneCallWeather();
-        assertEquals(20, OCW.KtoC(566.3),0);
+        assertEquals(20, OCW.KtoC(293.15),0);
 
     }
 
     @Test
     public  void wind_test1(){
-        OneCallWeather OCW = new OneCallWeather();
-        assertEquals("N", "N", OCW.getWind());
+        //TODO ez igy nem jo
+        //OneCallWeather OCW = new OneCallWeather();
+        //assertEquals("N", "N", OCW.getWind());
 
     }
 
     @Test
     public void feels_test(){
+        //todo ez igy
         OneCallWeather OCW  =   new OneCallWeather();
         OCW.response    = this.response;
         assertEquals( "test failed","11.11",OCW.getFeelsLike());
 
 
     }
-
-
+    /*
     @Test
     public void hour_test(){
         OneCallWeather OCW = new OneCallWeather();
@@ -101,7 +100,7 @@ public class ExampleUnitTest {
         OneCallWeather OCW  =   new OneCallWeather();
         assertEquals(Color.GRAY, OCW.getColor("Thunderstorm"));
 
-    }
+    }*/
 
 
 
