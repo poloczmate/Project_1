@@ -103,5 +103,35 @@ public class ExampleUnitTest {
     }*/
 
 
+    @Test
+    public void Color_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response    =   this.response;
+        assertEquals("test failed",0 , OCW.getColor());
+    }
+
+    @Test
+    public void getCelsius_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response    =   this.response;
+        assertEquals("test failed","12.12" , OCW.getCelsius());
+    }
+
+
+    @Test
+    public void getWeather_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response    =   this.response;
+        assertEquals("test failed",2131165287 , OCW.getWeatherID());
+    }
+
+    @Test
+    public void Weather_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response    =   this.response;
+        assertEquals("test failed","Clear, clear sky" , OCW.getWeather());
+    }
+
+
 
 }
