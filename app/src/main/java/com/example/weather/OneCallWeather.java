@@ -111,7 +111,8 @@ public class OneCallWeather {
         String toReturn = "Speed: ";
         try {
             obj = new JSONObject(response);
-            toReturn += obj.getJSONObject("current").getString("wind_speed") + " direction: ";
+            double speed = obj.getJSONObject("current").getDouble("wind_speed");
+            toReturn += String.valueOf(speed) + " direction: ";
 
             double degrees = obj.getJSONObject("current").getDouble("wind_deg");
             if (degrees >= 348.75 || degrees <= 11.25){
