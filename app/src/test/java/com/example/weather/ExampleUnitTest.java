@@ -104,13 +104,6 @@ public class ExampleUnitTest {
 
 
     @Test
-    public void Color_test(){
-        OneCallWeather OCW = new OneCallWeather();
-        OCW.response    =   this.response;
-        assertEquals("test failed",0 , OCW.getColor());
-    }
-
-    @Test
     public void getCelsius_test(){
         OneCallWeather OCW = new OneCallWeather();
         OCW.response    =   this.response;
@@ -132,6 +125,21 @@ public class ExampleUnitTest {
         assertEquals("test failed","Clear, clear sky" , OCW.getWeather());
     }
 
+    //TODO
+    @Test
+    public void Color_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response    =   this.response;
+        assertEquals("test failed","Rain" , OCW.getColor());
+    }
+    
+    //TODO
+    @Test
+    public void getWind_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response    =   this.response;
+        assertEquals("test failed","ENE" , OCW.getWind());
+    }
 
 
 }
