@@ -15,9 +15,7 @@ public class OneCallWeather {
     private String cityName;
     WeatherHour hourlyData[] = new WeatherHour[24];
 
-    public OneCallWeather(){
-
-    }
+    public OneCallWeather(){}
 
     public OneCallWeather(String city){
         CurrentWeather CW = new CurrentWeather(city);

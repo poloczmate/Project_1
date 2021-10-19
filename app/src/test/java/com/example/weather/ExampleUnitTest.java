@@ -22,21 +22,24 @@ import java.io.*;
 
 public class ExampleUnitTest {
 
-    String response="";
+    String OneCallWeatherResponse = "";
+    String CurrentWeatherResponse = "";
 
     @Before public void File_reader() throws IOException {
         File file = new File(
-                "src/test/java/com/example/weather/resp_data.txt");
-
-        BufferedReader br
-                = new BufferedReader(new FileReader(file));
-
+                "src/test/java/com/example/weather/onecall_weather_response.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
         String st = br.readLine(); ;
-
         while (st != null) {
+            OneCallWeatherResponse += st;
+            st = br.readLine();
+        }
 
-            response += st;
-
+        File file2 = new File("src/test/java/com/example/weather/current_weather_response.txt");
+        BufferedReader br2 = new BufferedReader(new FileReader(file2));
+        st = br2.readLine();
+        while (st != null) {
+            CurrentWeatherResponse += st;
             st = br.readLine();
         }
     }
@@ -56,48 +59,52 @@ public class ExampleUnitTest {
 
     @Test
     public void feels_test(){
-        OneCallWeather OCW  =   new OneCallWeather();
-        OCW.response    = this.response;
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response = OneCallWeatherResponse;
         assertEquals( "11.11",OCW.getFeelsLike());
     }
 
     @Test
     public void getCelsius_test(){
         OneCallWeather OCW = new OneCallWeather();
-        OCW.response    =   this.response;
+        OCW.response = OneCallWeatherResponse;
         assertEquals("12.12" , OCW.getCelsius());
     }
 
     @Test
     public void getWeather_test(){
         OneCallWeather OCW = new OneCallWeather();
-        OCW.response    =   this.response;
+        OCW.response = OneCallWeatherResponse;
         assertEquals(2131165287 , OCW.getWeatherID());
     }
 
     @Test
     public void Weather_test(){
         OneCallWeather OCW = new OneCallWeather();
-        OCW.response    =   this.response;
+        OCW.response = OneCallWeatherResponse;
         assertEquals("Clear, clear sky" , OCW.getWeather());
     }
 
-    //TODO
     @Test
     public void Color_test(){
         OneCallWeather OCW = new OneCallWeather();
-        OCW.response = this.response;
+        OCW.response = OneCallWeatherResponse;
         assertEquals(Color.parseColor("#81B4EA") , OCW.getColor());
     }
-    
-    //TODO
+
     @Test
     public void getWind_test(){
         OneCallWeather OCW = new OneCallWeather();
-        OCW.response    =   this.response;
+        OCW.response = OneCallWeatherResponse;
         String expected = "Speed: " + "3.09" + " direction: " + "NNE";
         assertEquals(expected, OCW.getWind());
     }
 
-
+    @Test
+    public void city_test(){
+        CurrentWeather CW = new CurrentWeather();
+        CW.response = CurrentWeatherResponse;
+        String expected = "Budapest";
+        assertEquals(expected,CW.getCityName());
+    }
 }

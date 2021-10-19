@@ -10,7 +10,6 @@ public class CurrentWeather {
     public String response = "";
 
     public CurrentWeather(String city){
-        //todo new apiparser
         try {
             this.apicity = new APIParserCity();
             apicity.execute(city);
@@ -19,6 +18,7 @@ public class CurrentWeather {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        System.out.println(response);
     }
 
     public CurrentWeather(double lat, double lon){
@@ -27,11 +27,13 @@ public class CurrentWeather {
             this.api = new APIParserCoord("weather");
             api.execute(lat,lon);
             TimeUnit.SECONDS.sleep(2);
-            while (response.equals("")) this.response = api.getData();
+            while (this.response.equals("")) this.response = api.getData();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+    public CurrentWeather(){}
 
     public void getResponse() {
         response = api.getData();
