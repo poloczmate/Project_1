@@ -24,6 +24,7 @@ public class ExampleUnitTest {
 
     String OneCallWeatherResponse = "";
     String CurrentWeatherResponse = "";
+    String WeatherHourResponse = "";
 
     @Before public void File_reader() throws IOException {
         File file = new File(
@@ -40,6 +41,14 @@ public class ExampleUnitTest {
         st = br2.readLine();
         while (st != null) {
             CurrentWeatherResponse += st;
+            st = br.readLine();
+        }
+
+        File file3 = new File("src/test/java/com/example/weather/WeatherHour.txt");
+        BufferedReader br3 = new BufferedReader(new FileReader(file3));
+        st = br3.readLine();
+        while (st != null) {
+            WeatherHourResponse += st;
             st = br.readLine();
         }
     }
@@ -105,6 +114,30 @@ public class ExampleUnitTest {
         CurrentWeather CW = new CurrentWeather();
         CW.response = CurrentWeatherResponse;
         String expected = "Budapest";
+        assertEquals(expected,CW.getCityName());
+    }
+
+    @Test
+    public void getLon_test(){
+        CurrentWeather CW = new CurrentWeather();
+        CW.response = WeatherHourResponse;
+        double expected = 13.404;
+        assertEquals(expected,CW.getLon(),0);
+    }
+
+    @Test
+    public void getLat_test(){
+        CurrentWeather CW = new CurrentWeather();
+        CW.response = WeatherHourResponse;
+        double expected = 52.520;
+        assertEquals(expected,CW.getLat(), 0.001);
+    }
+
+    @Test
+    public void cityBerlin_test(){
+        CurrentWeather CW = new CurrentWeather();
+        CW.response = WeatherHourResponse;
+        String expected = "Berlin";
         assertEquals(expected,CW.getCityName());
     }
 }
