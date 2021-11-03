@@ -13,6 +13,7 @@ public class OneCallWeather {
     private APIParserCoord api;
     public String response = "";
     private String cityName;
+    private boolean isCelsius = true;
     WeatherHour hourlyData[] = new WeatherHour[24];
 
     public OneCallWeather(){}
@@ -33,6 +34,24 @@ public class OneCallWeather {
         this.cityName = CW.getCityName();
         getHourlyWeather();
 
+    }
+
+    public OneCallWeather(String city, Boolean isFahrenheit){
+        this.isCelsius = !isFahrenheit;
+        CurrentWeather CW = new CurrentWeather(city);
+        try {
+            double lat = CW.getLat();
+            double lon = CW.getLon();
+            TimeUnit.SECONDS.sleep(2);
+            this.api = new APIParserCoord("onecall");
+            api.execute(lat,lon);
+            TimeUnit.SECONDS.sleep(2);
+            this.response = api.getData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        this.cityName = CW.getCityName();
+        getHourlyWeather();
     }
 
     public OneCallWeather(double lat, double lon){
@@ -57,9 +76,14 @@ public class OneCallWeather {
     }
 
     //convert kelvin to celsius
-    public double KtoC(double kelvin){
-        kelvin -= 273.15;
-        return (double) Math.round(kelvin * 100) / 100; //round it to 2 decimal
+    public double KtoCorF(double kelvin){
+        if (isCelsius){
+            kelvin -= 273.15;
+            return (double) Math.round(kelvin * 100) / 100; //round it to 2 decimal
+        }else{
+            kelvin = kelvin * 9/5 - 459.67;
+            return (double) Math.round(kelvin * 100) / 100; //round it to 2 decimal
+        }
     }
 
     //get weather description
@@ -153,12 +177,16 @@ public class OneCallWeather {
     }
 
     //get the temperature
-    public String getCelsius(){
+    public String getTemperatures(){
         JSONObject obj = null;
         try {
             obj = new JSONObject(response);
-            double temp = KtoC(obj.getJSONObject("current").getDouble("temp"));
-            return String.valueOf(temp);
+            double temp = KtoCorF(obj.getJSONObject("current").getDouble("temp"));
+            if (isCelsius){
+                return String.valueOf(temp) + " Celsius";
+            }else{
+                return String.valueOf(temp) + " Fahrenheit";
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -170,8 +198,12 @@ public class OneCallWeather {
         JSONObject obj = null;
         try {
             obj = new JSONObject(response);
-            double temp = KtoC(obj.getJSONObject("current").getDouble("feels_like"));
-            return String.valueOf(temp);
+            double temp = KtoCorF(obj.getJSONObject("current").getDouble("feels_like"));
+            if (isCelsius){
+                return String.valueOf(temp) + " Celsius";
+            }else{
+                return String.valueOf(temp) + " Fahrenheit";
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -221,5 +253,13 @@ public class OneCallWeather {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public void changeTemp(boolean isFahrenheit){
+        if (isFahrenheit){
+            isCelsius = false;
+        }else{
+            isCelsius = true;
+        }
     }
 }

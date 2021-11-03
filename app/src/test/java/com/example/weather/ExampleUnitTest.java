@@ -1,6 +1,5 @@
 package com.example.weather;
 
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,7 +76,7 @@ public class ExampleUnitTest {
     public void getCelsius_test(){
         OneCallWeather OCW = new OneCallWeather();
         OCW.response = OneCallWeatherResponse;
-        assertEquals("12.12" , OCW.getCelsius());
+        assertEquals("12.12" , OCW.getTemperatures());
     }
 
     @Test

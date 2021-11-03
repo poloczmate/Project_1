@@ -7,19 +7,22 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.concurrent.TimeUnit;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     private final int REQUEST_LOCATION_PERMISSION = 1;
     double lat = 0;
     double lon = 0;
     LocationTracker locationTracker;
     boolean permissionsGranted;
+    OneCallWeather OCW = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +65,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateGUI(){
-        OneCallWeather OCW = new OneCallWeather(lat,lon);
-        //wait for the API response
-        try {
-            while (OCW.response.equals("")) {
-                OCW.getResponse();
-                TimeUnit.MILLISECONDS.sleep(250);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         //get GUI elements
         TextView we = (TextView) findViewById(R.id.weather);
         TextView te = (TextView) findViewById(R.id.temp);
@@ -79,10 +72,25 @@ public class MainActivity extends AppCompatActivity {
         TextView cn = (TextView) findViewById(R.id.cityName);
         ImageView iv = (ImageView) findViewById(R.id.image);
         ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.layout);
+        Switch sw = (Switch) findViewById(R.id.switch1);
+        sw.setOnCheckedChangeListener(this);
+
+        if(OCW == null){
+            OCW = new OneCallWeather(lat,lon);
+            //wait for the API response
+            try {
+                while (OCW.response.equals("")) {
+                    OCW.getResponse();
+                    TimeUnit.MILLISECONDS.sleep(250);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         //update GUI
         we.setText(OCW.getWeather());
-        te.setText("Celsius: " + OCW.getCelsius() + ", feels like: " + OCW.getFeelsLike() + " celsius");
+        te.setText(OCW.getTemperatures() + ", feels like: " + OCW.getFeelsLike());
         wi.setText(OCW.getWind());
         cn.setText(OCW.getCityName());
         iv.setImageResource(OCW.getWeatherID());
@@ -121,5 +129,13 @@ public class MainActivity extends AppCompatActivity {
             EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_LOCATION_PERMISSION, perms);
             return false;
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Toast.makeText(this, "Temperatures switched to " + (isChecked ? "Fahrenheit" : "Celsius"),
+                Toast.LENGTH_SHORT).show();
+        OCW.changeTemp(isChecked);
+        updateGUI();
     }
 }
