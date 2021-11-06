@@ -55,13 +55,13 @@ public class ExampleUnitTest {
     @Test
     public void Kelvin_Test(){
         OneCallWeather OCW = new OneCallWeather();
-        assertEquals(10.00, OCW.KtoC(283.15), 0);
+        assertEquals(10.00, OCW.KtoCorF(283.15), 0);
     }
 
     @Test
     public void Kelvin_Test2(){
         OneCallWeather OCW =  new OneCallWeather();
-        assertEquals(-10, OCW.KtoC(263.15),0);
+        assertEquals(-10, OCW.KtoCorF(263.15),0);
 
     }
 
@@ -69,14 +69,14 @@ public class ExampleUnitTest {
     public void feels_test(){
         OneCallWeather OCW = new OneCallWeather();
         OCW.response = OneCallWeatherResponse;
-        assertEquals( "11.11",OCW.getFeelsLike());
+        assertEquals( "11.11 Celsius",OCW.getFeelsLike());
     }
 
     @Test
     public void getCelsius_test(){
         OneCallWeather OCW = new OneCallWeather();
         OCW.response = OneCallWeatherResponse;
-        assertEquals("12.12" , OCW.getTemperatures());
+        assertEquals("12.12 Celsius" , OCW.getTemperatures());
     }
 
     @Test
