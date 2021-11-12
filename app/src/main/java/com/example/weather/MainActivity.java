@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.concurrent.TimeUnit;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         TextView te = (TextView) findViewById(R.id.temp);
         TextView wi = (TextView) findViewById(R.id.wind);
         TextView cn = (TextView) findViewById(R.id.cityName);
+        TextView ww = (TextView) findViewById(R.id.whatToWear);
         ImageView iv = (ImageView) findViewById(R.id.image);
         ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.layout);
         Switch sw = (Switch) findViewById(R.id.switch1);
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         cn.setText(OCW.getCityName());
         iv.setImageResource(OCW.getWeatherID());
         cl.setBackgroundColor(OCW.getColor());
+        ww.setText(OCW.getWear());
     }
 
     public void switchViewCities(View view){

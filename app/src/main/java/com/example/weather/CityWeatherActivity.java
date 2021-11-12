@@ -11,6 +11,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.concurrent.TimeUnit;
 
 public class CityWeatherActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
@@ -48,6 +50,7 @@ public class CityWeatherActivity extends AppCompatActivity implements CompoundBu
         TextView we = (TextView) findViewById(R.id.weather2);
         TextView te = (TextView) findViewById(R.id.temp2);
         TextView wi = (TextView) findViewById(R.id.wind2);
+        TextView ww = (TextView) findViewById(R.id.whatToWear2);
         ImageView iv = (ImageView) findViewById(R.id.imageCity);
         ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.layout2);
 
@@ -55,6 +58,7 @@ public class CityWeatherActivity extends AppCompatActivity implements CompoundBu
         we.setText(OCW.getWeather());
         te.setText(OCW.getTemperatures() + ", feels like: " + OCW.getFeelsLike());
         wi.setText(OCW.getWind());
+        ww.setText(OCW.getWear());
         iv.setImageResource(OCW.getWeatherID());
         cl.setBackgroundColor(OCW.getColor());
     }

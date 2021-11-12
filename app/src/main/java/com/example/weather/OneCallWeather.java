@@ -190,7 +190,20 @@ public class OneCallWeather {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return ""; //-250 = error
+        return "";
+    }
+
+    public double getTemp(){
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(response);
+            double temp = obj.getJSONObject("current").getDouble("temp");
+            temp -= 273.15;
+            return (double) Math.round(temp * 100) / 100;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return -250; //-250 = error
     }
 
     //get how the temperature feels
@@ -261,5 +274,68 @@ public class OneCallWeather {
         }else{
             isCelsius = true;
         }
+    }
+
+    public String getWear() {
+        JSONObject obj = null;
+        double temp = getTemp();
+        try{
+            obj = new JSONObject(response);
+            JSONArray arr = obj.getJSONObject("current").getJSONArray("weather");
+            String main = arr.getJSONObject(0).getString("main");
+
+            if (getTemp() <= 10){
+                if (main.equals("Thunderstorm")){
+                    return "Thunderstorm es hideg";
+                } else if (main.equals("Drizzle")){
+                    return "Drizzle es hideg";
+                } else if (main.equals("Rain")){
+                    return "Rain es hideg";
+                } else if (main.equals("Snow")){
+                    return "Snow es hideg";
+                } else if (main.equals("Clear")){
+                    return "Clear es hideg";
+                } else if (main.equals("Clouds")){
+                    return "Clouds es hideg";
+                } else{
+                    return "Stay at home es hideg";
+                }
+            }else if (getTemp() > 10 && getTemp() <= 20){
+                if (main.equals("Thunderstorm")){
+                    return "Thunderstorm es kozepes";
+                } else if (main.equals("Drizzle")){
+                    return "Drizzle es kozepes";
+                } else if (main.equals("Rain")){
+                    return "Rain es kozepes";
+                } else if (main.equals("Snow")){
+                    return "Snow es kozepes";
+                } else if (main.equals("Clear")){
+                    return "Clear es kozepes";
+                } else if (main.equals("Clouds")){
+                    return "Clouds es kozepes";
+                } else{
+                    return "Stay at home es kozepes";
+                }
+            }else{
+                if (main.equals("Thunderstorm")){
+                    return "Thunderstorm es meleg";
+                } else if (main.equals("Drizzle")){
+                    return "Drizzle es meleg";
+                } else if (main.equals("Rain")){
+                    return "Rain es meleg";
+                } else if (main.equals("Snow")){
+                    return "Snow es meleg";
+                } else if (main.equals("Clear")){
+                    return "Clear es meleg";
+                } else if (main.equals("Clouds")){
+                    return "Clouds es meleg";
+                } else{
+                    return "Stay at home es meleg";
+                }
+            }
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return "";
     }
 }

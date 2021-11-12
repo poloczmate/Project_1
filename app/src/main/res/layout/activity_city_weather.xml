@@ -69,6 +69,19 @@
         app:layout_constraintVertical_bias="0.054" />
 
     <TextView
+        android:id="@+id/whatToWear2"
+        android:layout_width="335dp"
+        android:layout_height="29dp"
+        android:textColorLink="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <TextView
         android:id="@+id/weather2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,7 +124,7 @@
         android:id="@+id/cityInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="292dp"
+        android:layout_marginBottom="244dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -125,7 +138,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="188dp"
         android:onClick="getWeather"
         android:text="Get weather"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -139,10 +152,10 @@
         android:layout_height="166dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.932"
+        app:layout_constraintVertical_bias="0.971"
         tools:srcCompat="@drawable/clear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
