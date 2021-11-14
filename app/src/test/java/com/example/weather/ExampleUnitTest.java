@@ -159,4 +159,11 @@ public class ExampleUnitTest {
         OCW.response = OneCallWeatherResponse;
         assertEquals(OCW.getIsCelsius(), false);
     }
+
+    @Test
+    public void clothing_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response = OneCallWeatherResponse;
+        assertEquals("Wintercoat, layered, warm coating, fur-lined, shoes or boots", OCW.getWear());
+    }
 }

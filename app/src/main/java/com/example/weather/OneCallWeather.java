@@ -298,7 +298,7 @@ public class OneCallWeather {
                 } else if (main.equals("Snow")){
                     return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof boots";
                 } else if (main.equals("Clear")){
-                    return "wintercoat, layered, warm coating, fur-lined, shoes or boots";
+                    return "Wintercoat, layered, warm coating, fur-lined, shoes or boots";
                 } else if (main.equals("Clouds")){
                     return "Wintercoat, layered, warm coating, fur-lined, shoes or boots";
                 } else{
@@ -346,7 +346,7 @@ public class OneCallWeather {
                 } else if (main.equals("Snow")){
                     return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof boots";
                 } else if (main.equals("Clear")){
-                    return "slight t-shirt, sandals";
+                    return "Slight t-shirt, sandals";
                 } else if (main.equals("Clouds")){
                     return "Slight t-shirt, sandals";
                 } else{
