@@ -18,6 +18,10 @@ public class OneCallWeather {
 
     public OneCallWeather(){}
 
+    public OneCallWeather(boolean isFahrenheit){
+        isCelsius = !isFahrenheit;
+    }
+
     public OneCallWeather(String city){
         CurrentWeather CW = new CurrentWeather(city);
         try {
@@ -337,5 +341,9 @@ public class OneCallWeather {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public boolean getIsCelsius(){
+        return isCelsius;
     }
 }

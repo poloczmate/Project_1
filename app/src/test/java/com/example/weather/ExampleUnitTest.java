@@ -17,6 +17,11 @@ import java.io.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 
+/*
+
++1 ha OneCallWeather masik konstruktort hivjuk, ahol megadjuk milyen mertekegyseggel induljon is legyen letesztelve.
+ */
+
 
 
 public class ExampleUnitTest {
@@ -138,5 +143,20 @@ public class ExampleUnitTest {
         CW.response = WeatherHourResponse;
         String expected = "Berlin";
         assertEquals(expected,CW.getCityName());
+    }
+
+    @Test
+    public void fahrenheit_to_celsius_test(){
+        OneCallWeather OCW = new OneCallWeather();
+        OCW.response = OneCallWeatherResponse;
+        OCW.changeTemp(true); //switch to fahrenheit
+        assertEquals("53.82 Fahrenheit" , OCW.getTemperatures());
+    }
+
+    @Test
+    public void start_with_fahrenheit(){
+        OneCallWeather OCW = new OneCallWeather(true);
+        OCW.response = OneCallWeatherResponse;
+        assertEquals(OCW.getIsCelsius(), false);
     }
 }

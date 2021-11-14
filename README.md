@@ -1,2 +1,0 @@
-Return JSON Example:
-{"coord":{"lon":-0.1257,"lat":51.5085},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":291.25,"feels_like":290.76,"temp_min":289.89,"temp_max":292.72,"pressure":1025,"humidity":63},"visibility":10000,"wind":{"speed":4.63,"deg":360},"clouds":{"all":90},"dt":1630254687,"sys":{"type":2,"id":2006068,"country":"GB","sunrise":1630213719,"sunset":1630263278},"timezone":3600,"id":2643743,"name":"London","cod":200}
