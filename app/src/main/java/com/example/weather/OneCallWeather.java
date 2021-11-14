@@ -288,53 +288,69 @@ public class OneCallWeather {
             JSONArray arr = obj.getJSONObject("current").getJSONArray("weather");
             String main = arr.getJSONObject(0).getString("main");
 
-            if (getTemp() <= 10){
+            if (getTemp() <= 15){
                 if (main.equals("Thunderstorm")){
-                    return "Thunderstorm es hideg";
+                    return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof shoes or boots, umbrella";
                 } else if (main.equals("Drizzle")){
-                    return "Drizzle es hideg";
+                    return "Wintercoat, layered, warm coating, fur-lined, waterproof shoes or boots, umbrella";
                 } else if (main.equals("Rain")){
-                    return "Rain es hideg";
+                    return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof shoes or boots, umbrella";
                 } else if (main.equals("Snow")){
-                    return "Snow es hideg";
+                    return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof boots";
                 } else if (main.equals("Clear")){
-                    return "Clear es hideg";
+                    return "wintercoat, layered, warm coating, fur-lined, shoes or boots";
                 } else if (main.equals("Clouds")){
-                    return "Clouds es hideg";
+                    return "Wintercoat, layered, warm coating, fur-lined, shoes or boots";
                 } else{
-                    return "Stay at home es hideg";
+                    return "STAY AT HOME";
                 }
-            }else if (getTemp() > 10 && getTemp() <= 20){
+            }else if (getTemp() > 15 && getTemp() <= 20){
                 if (main.equals("Thunderstorm")){
-                    return "Thunderstorm es kozepes";
+                    return "Waterproof jacket, layered coating,  waterproof shoes, umbrella";
                 } else if (main.equals("Drizzle")){
-                    return "Drizzle es kozepes";
+                    return "Jacket, layered coating,  waterproof shoes, umbrella";
                 } else if (main.equals("Rain")){
-                    return "Rain es kozepes";
+                    return "Waterproof jacket, layered coating,  waterproof shoes, umbrella";
                 } else if (main.equals("Snow")){
-                    return "Snow es kozepes";
+                    return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof boots";
                 } else if (main.equals("Clear")){
-                    return "Clear es kozepes";
+                    return "Light coat, layered coating, closed shoes";
                 } else if (main.equals("Clouds")){
-                    return "Clouds es kozepes";
+                    return "Light coat, layered coating, closed shoes";
                 } else{
-                    return "Stay at home es kozepes";
+                    return "STAY AT HOME";
+                }
+            }else if (getTemp() > 20 && getTemp() <= 25){
+                if (main.equals("Thunderstorm")){
+                    return "Raincoat or windbreaker, slight t-shirt, sweater, waterproof shoes, umbrella";
+                } else if (main.equals("Drizzle")){
+                    return "Light coat, slight t-shirt, sweater, waterproof shoes, umbrella";
+                } else if (main.equals("Rain")){
+                    return "Light coat, slight t-shirt, sweater, waterproof shoes, umbrella";
+                } else if (main.equals("Snow")){
+                    return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof boots";
+                } else if (main.equals("Clear")){
+                    return "Light coat, sweater, t-shirt, oxford shoes";
+                } else if (main.equals("Clouds")){
+                    return "Slight t-shirt, sandals";
+                } else{
+                    return "STAY AT HOME";
                 }
             }else{
                 if (main.equals("Thunderstorm")){
-                    return "Thunderstorm es meleg";
+                    return "Raincoat or windbreaker, slight t-shirt, waterproof shoes, umbrella";
                 } else if (main.equals("Drizzle")){
-                    return "Drizzle es meleg";
+                    return "Sweater, slight t-shirt, waterproof shoes, umbrella";
                 } else if (main.equals("Rain")){
-                    return "Rain es meleg";
+                    return "Raincoat, slight t-shirt, sweater, waterproof shoes, umbrella ";
                 } else if (main.equals("Snow")){
-                    return "Snow es meleg";
+                    return "Waterproof wintercoat, layered, warm coating, fur-lined, waterproof boots";
                 } else if (main.equals("Clear")){
-                    return "Clear es meleg";
+                    return "slight t-shirt, sandals";
                 } else if (main.equals("Clouds")){
-                    return "Clouds es meleg";
+                    return "Slight t-shirt, sandals";
                 } else{
-                    return "Stay at home es meleg";
+                    return "STAY AT HOME";
                 }
             }
         } catch (JSONException e){
