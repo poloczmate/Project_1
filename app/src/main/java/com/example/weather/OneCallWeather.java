@@ -112,6 +112,8 @@ public class OneCallWeather {
 
             if (main.equals("Thunderstorm")){
                 return R.drawable.thunderstorm;
+            } else if(main.equals("Mist") || main.equals("Fog")){
+                return R.drawable.mist;
             } else if (main.equals("Drizzle")){
                 return R.drawable.drizzle;
             } else if (main.equals("Rain")){
@@ -253,7 +255,7 @@ public class OneCallWeather {
 
             if (main.equals("Thunderstorm")){
                 return Color.GRAY;
-            } else if (main.equals("Drizzle")){
+            } else if (main.equals("Drizzle") || main.equals("Mist") || main.equals("Fog")){
                 return Color.LTGRAY;
             } else if (main.equals("Rain")){
                 return Color.GRAY;
