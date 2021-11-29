@@ -21,8 +21,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"channelName") //create notification channel
                 .setSmallIcon(R.drawable.ic_launcher_background)    //set the icon when the notification is displayed
-                .setContentTitle("Foxandroid Alarm Manager") //set title
-                .setContentText("GOOOOOOD MOOOORNING") // set text
+                .setContentTitle("ALARM ALARM ALARM") //set title
+                .setContentText("ALARM") // set text
                 .setAutoCancel(true)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

@@ -73,7 +73,7 @@
         android:layout_width="335dp"
         android:layout_height="29dp"
         android:textColorLink="@color/black"
-        android:textSize="24sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"

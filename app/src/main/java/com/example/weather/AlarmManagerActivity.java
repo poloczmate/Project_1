@@ -100,7 +100,7 @@ public class AlarmManagerActivity extends AppCompatActivity {
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             CharSequence name = "NameNameNameName"; //TODO Name
-            String description = "This is a alarm manager yeahh"; //todo description
+            String description = "This is a alarm manager"; //todo description
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel("channelName", name, importance); //todo channelname
             channel.setDescription(description);
